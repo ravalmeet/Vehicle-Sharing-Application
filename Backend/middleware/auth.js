@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const config = require("../config/config");
+import config from "../config/config"
 
 const verifyToken = async (req, res, next) => {
   const token =
