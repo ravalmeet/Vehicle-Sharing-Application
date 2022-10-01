@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
-import config from "../config/config"
+import jwt from "jsonwebtoken";
+import { config } from "../config/config.js";
 
-const verifyToken = async (req, res, next) => {
+export const verifyToken = async (req, res, next) => {
   const token =
     req.body.token || req.query.token || req.headers["authorization"];
 
@@ -18,4 +18,3 @@ const verifyToken = async (req, res, next) => {
   }
   return next();
 };
-module.exports = verifyToken;

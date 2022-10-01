@@ -1,7 +1,7 @@
 import UserModel from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import config from "../config/config"
+import {config} from "../config/config.js"
 // const config = require("../config/config")
 
 // Method for generating session token for active user
