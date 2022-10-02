@@ -10,6 +10,9 @@ const UserSchema = new mongoose.Schema(
     profilePic: { type: String, defaut: "" },
     isHost: { type: Boolean, default: false },
     isVerified: { type: Boolean, default: false },
+    availableSeats : { type : Number , default : 0 },
+    groupID : { type : String},
+    
   },
   { timestamps: true }
 );
