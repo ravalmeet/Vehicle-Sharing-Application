@@ -154,13 +154,13 @@ export const update_password = async (req, res) => {
 
     if (data) {
       const newPassword = await securePassword(password);
-      const newConfirmPassword = await securePassword(password);
+      
       const userData = await UserModel.findByIdAndUpdate(
         { _id: user_id },
         {
           $set: {
             password: newPassword,
-            confirmPassword: newConfirmPassword,
+            confirmPassword: newPassword,
           },
         }
       );
@@ -209,13 +209,13 @@ export const reset_password = async (req, res) => {
     if (tokenData) {
       const password = req.body.password;
       const newPassword = await securePassword(password);
-      const newConfirmPassword = await securePassword(password);
+   
       const userData = await User.findByIdAndUpdate(
         { _id: tokenData._id },
         {
           $set: {
             password: newPassword,
-            confirmPassword: newConfirmPassword,
+            confirmPassword: newPassword,
             token: "",
           },
         },

@@ -1,6 +1,6 @@
 export const config = {
     secret_jwt: "khuljasimsim",
-    emailUser: "put your email here",
-    emailPassword:"corresponding password",
+    emailUser: "madhucs987@gmail.com",
+    emailPassword:"ehiyavgzdcjurstq",
   };
   
