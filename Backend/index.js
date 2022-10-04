@@ -1,11 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import authRoute from "./routes/authRoute.js";  // routes
-
+import authRoute from "./routes/authRoute.js"; // auth routes
+import profileRouter from "./routes/profileRoute.js"; // profile routes
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
 dotenv.config();
 const PORT = process.env.PORT;
@@ -19,3 +19,4 @@ mongoose
   .catch((error) => console.log(`${error} did not connect`));
 
 app.use("/auth", authRoute);
+app.use("/api", profileRouter);

@@ -24,7 +24,7 @@ const sendResetPasswordMail = async (name, email, token) => {
       to: email,
       subject: "Reset Password",
       html:
-        "<p> Hii" +
+        "<p> Hii " +
         name +
         ', Please copy the link <a href = "http://localhost:3000/api/reset-password?token=' +
         token +
@@ -154,7 +154,7 @@ export const update_password = async (req, res) => {
 
     if (data) {
       const newPassword = await securePassword(password);
-      
+
       const userData = await UserModel.findByIdAndUpdate(
         { _id: user_id },
         {
@@ -209,7 +209,7 @@ export const reset_password = async (req, res) => {
     if (tokenData) {
       const password = req.body.password;
       const newPassword = await securePassword(password);
-   
+
       const userData = await User.findByIdAndUpdate(
         { _id: tokenData._id },
         {
@@ -221,19 +221,17 @@ export const reset_password = async (req, res) => {
         },
         { new: true }
       );
-      res
-        .status(200)
-        .send({
-          success: true,
-          msg: "User password has been reset",
-          data: userData,
-        });
+      res.status(200).send({
+        success: true,
+        msg: "User password has been reset",
+        data: userData,
+      });
     } else {
       res
         .status(200)
         .send({ success: true, msg: "This link has been expired" });
     }
   } catch (err) {
-    res.status(400).send({ success: false, msg: error.message });
+    res.status(400).send({ success: false, msg: err.message });
   }
 };
