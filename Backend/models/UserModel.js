@@ -8,11 +8,12 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
     confirmPassword: { type: String, required: true },
     profilePic: { type: String, defaut: "" },
-    isHost: { type: Boolean, required:true },
-    isVerified: { type: Boolean, required:true },
+    isHost: { type: Boolean, required: true },
+    isVerified: { type: Boolean, required: true },
+    token: { type: String, default: "" },
     // availableSeats: { type: Number, default: 0 },
     // groupID: { type: String },
-  },
+  }
   // { timestamps: true }
 );
 

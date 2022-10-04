@@ -78,6 +78,11 @@
   "resolved" "https://registry.npmjs.org/array-flatten/-/array-flatten-1.1.1.tgz"
   "version" "1.1.1"
 
+"array-uniq@1.0.2":
+  "integrity" "sha512-GVYjmpL05al4dNlKJm53mKE4w9OOLiuVHWorsIA3YVz+Hu0hcn6PtE3Ydl0EqU7v+7ABC4mjjWsnLUxbpno+CA=="
+  "resolved" "https://registry.npmjs.org/array-uniq/-/array-uniq-1.0.2.tgz"
+  "version" "1.0.2"
+
 "balanced-match@^1.0.0":
   "integrity" "sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw=="
   "resolved" "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz"
@@ -695,6 +700,11 @@
   dependencies:
     "whatwg-url" "^5.0.0"
 
+"nodemailer@^6.8.0":
+  "integrity" "sha512-EjYvSmHzekz6VNkNd12aUqAco+bOkRe3Of5jVhltqKhEsjw/y0PYPJfp83+s9Wzh1dspYAkUW/YNQ350NATbSQ=="
+  "resolved" "https://registry.npmjs.org/nodemailer/-/nodemailer-6.8.0.tgz"
+  "version" "6.8.0"
+
 "nopt@^5.0.0":
   "integrity" "sha512-Tbj67rffqceeLpcRXrT7vKAN8CwfPeIBgM7E6iBkmKLV7bEMwpGgYLGv0jACUsECaa/vuxP0IjEont6umdMgtQ=="
   "resolved" "https://registry.npmjs.org/nopt/-/nopt-5.0.0.tgz"
@@ -770,6 +780,19 @@
   "version" "6.10.3"
   dependencies:
     "side-channel" "^1.0.4"
+
+"randombytes@2.0.3":
+  "integrity" "sha512-lDVjxQQFoCG1jcrP06LNo2lbWp4QTShEXnhActFBwYuHprllQV6VUpwreApsYqCgD+N1mHoqJ/BI/4eV4R2GYg=="
+  "resolved" "https://registry.npmjs.org/randombytes/-/randombytes-2.0.3.tgz"
+  "version" "2.0.3"
+
+"randomstring@^1.2.2":
+  "integrity" "sha512-9FByiB8guWZLbE+akdQiWE3I1I6w7Vn5El4o4y7o5bWQ6DWPcEOp+aLG7Jezc8BVRKKpgJd2ppRX0jnKu1YCfg=="
+  "resolved" "https://registry.npmjs.org/randomstring/-/randomstring-1.2.2.tgz"
+  "version" "1.2.2"
+  dependencies:
+    "array-uniq" "1.0.2"
+    "randombytes" "2.0.3"
 
 "range-parser@~1.2.1":
   "integrity" "sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg=="
