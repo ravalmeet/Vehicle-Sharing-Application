@@ -1,22 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { Image, SafeAreaView, StyleSheet, Text, View, } from "react-native";
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import IntoScreen from "./screens/intro_screen";
+import HomeScreen from "./screens/home_screen";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+
+
   return (
-    <View style={styles.container}>
-      <Text>Car Sharing Application</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {<Stack.Screen
+          name="IntroScreen"
+          component={IntoScreen}
+        />}
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-
-  },
-});
-

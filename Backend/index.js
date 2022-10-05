@@ -1,9 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-
-// routes
-import authRoute from "./routes/authRoute.js";
+import authRoute from "./routes/authRoute.js";  // routes
+import profileRoute from "./routes/profileRoute.js";
 
 const app = express();
 
@@ -21,3 +20,4 @@ mongoose
   .catch((error) => console.log(`${error} did not connect`));
 
 app.use("/auth", authRoute);
+app.use("/profile", profileRoute);
