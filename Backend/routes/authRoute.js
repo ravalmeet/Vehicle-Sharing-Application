@@ -5,29 +5,55 @@ import {
   update_password,
   forgot_password,
   reset_password,
+  add_profile,
 } from "../controllers/userController.js";
-import { verifyToken } from "../middleware/auth.js";
-import bodyParser from "body-parser";
- 
 const router = express();
-
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
+import multer from "multer";
+import path from "path";
+const __dirname = path.resolve();
+router.use(express.static("public"));
 
-router.post("/register", registerUser);
-router.post("/login", loginUser);
-
- //for testing the login jwt-token 
-
-router.get("/test", verifyToken, function (req, res) {
-  res.status(200).send({ success: true, msg: "Authenticated!!" });
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(
+      null,
+      path.join(__dirname, "../public/userImages"),
+      function (error, success) {
+        if (error) throw error;
+      }
+    );
+  },
+  filename: function (req, file, cb) {
+    const name = Date.now() + "-" + file.originalname;
+    cb(null, name, function (error1, success) {
+      if (error1) throw error1;
+    });
+  },
 });
 
-//update password route
-router.post("/update-password", update_password);
+const upload = multer({ storage: storage });
+import { verifyToken } from "../middleware/auth.js";
+import bodyParser from "body-parser";
 
-router.post("/forgot-password", forgot_password);
 
-router.get("/reset-password", reset_password);
- 
+// router.post("/register", registerUser);
+// router.post("/login", loginUser);
+
+// //for testing the login jwt-token
+
+// router.get("/test", verifyToken, function (req, res) {
+//   res.status(200).send({ success: true, msg: "Authenticated!!" });
+// });
+
+// //update password route
+// router.post("/update-password", update_password);
+
+// router.post("/forgot-password", forgot_password);
+
+// router.get("/reset-password", reset_password);
+
+router.post("/add-profile", upload.single("image"), add_profile);
+
 export default router;

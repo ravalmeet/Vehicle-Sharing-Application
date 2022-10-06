@@ -1,10 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
-import mongoose from "mongoose";
- 
- 
+import mongoose from "mongoose"; 
 import authRoute from "./routes/authRoute.js"; // auth routes
-import profileRouter from "./routes/profileRoute.js"; // profile routes
+// import profileRouter from "./routes/profileRoute.js"; // profile routes
 const app = express();
 
 app.use(express.json());
@@ -22,4 +20,4 @@ mongoose
 
 app.use("/auth", authRoute);
  
-app.use("/api", profileRouter);
+// app.use("/api", profileRouter);

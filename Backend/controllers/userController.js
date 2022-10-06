@@ -81,7 +81,7 @@ export const registerUser = async (req, res) => {
     password: spassword,
     confirmPassword: spassword,
     phoneNumber: req.body.phoneNumber,
-    // profilePic: req.file.filename,
+    // image: req.file.filename,
     isHost: req.body.isHost,
     isVerified: req.body.isVerified,
   });
@@ -121,8 +121,7 @@ export const loginUser = async (req, res) => {
           _id: user._id,
           name: user.name,
           email: user.email,
-          password: user.password,
-          // profilePic: user.profilePic,
+          password: user.password,         
           phoneNumber: user.phoneNumber,
           isHost: user.isHost,
           isVerified: user.isVerified,
@@ -238,3 +237,28 @@ export const reset_password = async (req, res) => {
     res.status(400).send({ success: false, msg: err.message });
   }
 };
+
+
+
+export const add_profile = async (req, res) => {
+  console.log(req)
+  const user_id = req.body.user_id;
+   
+  console.log(image)
+  try {
+    const userData = await UserModel.findOne({  id: user_id  });
+    if (userData) {
+      const data = await UserModel.updateOne(
+        {  _id: user_id },
+        { $set: { image: req.file.filename } }
+      );
+
+      res.status(200).send({ success: true, msg: "Profile set!! " });
+    } else {
+      res.status(200).send({ success: false, msg: "User doesn't exists" });
+    }
+  } catch (err) {
+    res.status(400).send({ success: false, msg: err.message });
+  }
+};
+  
