@@ -24,11 +24,8 @@ const sendResetPasswordMail = async (name, email, token) => {
       to: email,
       subject: "Reset Password",
       html:
-<<<<<<< HEAD
-        "<p> Hii" +
-=======
+ 
         "<p> Hii " +
->>>>>>> 63556f50f64d3d2e9fe83b768827e3e482f2ddc1
         name +
         ', Please copy the link <a href = "http://localhost:3000/api/reset-password?token=' +
         token +
@@ -158,11 +155,7 @@ export const update_password = async (req, res) => {
 
     if (data) {
       const newPassword = await securePassword(password);
-<<<<<<< HEAD
-      
-=======
-
->>>>>>> 63556f50f64d3d2e9fe83b768827e3e482f2ddc1
+ 
       const userData = await UserModel.findByIdAndUpdate(
         { _id: user_id },
         {
@@ -217,11 +210,7 @@ export const reset_password = async (req, res) => {
     if (tokenData) {
       const password = req.body.password;
       const newPassword = await securePassword(password);
-<<<<<<< HEAD
-   
-=======
-
->>>>>>> 63556f50f64d3d2e9fe83b768827e3e482f2ddc1
+ 
       const userData = await User.findByIdAndUpdate(
         { _id: tokenData._id },
         {
@@ -233,31 +222,19 @@ export const reset_password = async (req, res) => {
         },
         { new: true }
       );
-<<<<<<< HEAD
-      res
-        .status(200)
-        .send({
-          success: true,
-          msg: "User password has been reset",
-          data: userData,
-        });
-=======
+ 
       res.status(200).send({
         success: true,
         msg: "User password has been reset",
         data: userData,
       });
->>>>>>> 63556f50f64d3d2e9fe83b768827e3e482f2ddc1
     } else {
       res
         .status(200)
         .send({ success: true, msg: "This link has been expired" });
     }
   } catch (err) {
-<<<<<<< HEAD
-    res.status(400).send({ success: false, msg: error.message });
-=======
+ 
     res.status(400).send({ success: false, msg: err.message });
->>>>>>> 63556f50f64d3d2e9fe83b768827e3e482f2ddc1
   }
 };

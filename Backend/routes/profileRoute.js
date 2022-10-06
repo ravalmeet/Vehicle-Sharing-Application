@@ -1,12 +1,12 @@
-import express from "express";
-<<<<<<< HEAD
-import {  update_profile } from "../controllers/profileController.js";
-const router = express();
+// import express from "express";
+ 
+// import {  update_profile } from "../controllers/profileController.js";
+// const router = express();
 
-router.post("/update-profile", update_profile);
+// router.post("/update-profile", update_profile);
 
-export default router;
-=======
+// export default router;
+ 
 import bodyParser from "body-parser";
 import multer from "multer";
 import path from "path";
@@ -38,5 +38,4 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 profileRouter.post("/profiles", upload.single("profile"), profiles);
-export default profileRouter;
->>>>>>> 63556f50f64d3d2e9fe83b768827e3e482f2ddc1
+export default profileRouter; 

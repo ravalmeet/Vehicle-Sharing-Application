@@ -17,10 +17,7 @@
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.2",
-<<<<<<< HEAD
-=======
     "multer": "^1.4.5-lts.1",
->>>>>>> 63556f50f64d3d2e9fe83b768827e3e482f2ddc1
     "nodemailer": "^6.8.0",
     "randomstring": "^1.2.2"
   }
