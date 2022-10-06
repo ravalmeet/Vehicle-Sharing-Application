@@ -6,6 +6,9 @@ import {
   forgot_password,
   reset_password,
   add_profile,
+  update_profile,
+  add_location,
+  
 } from "../controllers/userController.js";
 const router = express();
 router.use(bodyParser.json());
@@ -38,22 +41,24 @@ import { verifyToken } from "../middleware/auth.js";
 import bodyParser from "body-parser";
 
 
-// router.post("/register", registerUser);
-// router.post("/login", loginUser);
+router.post("/register", registerUser);
+router.post("/login", loginUser);
 
-// //for testing the login jwt-token
+//for testing the login jwt-token
 
-// router.get("/test", verifyToken, function (req, res) {
-//   res.status(200).send({ success: true, msg: "Authenticated!!" });
-// });
+router.get("/test", verifyToken, function (req, res) {
+  res.status(200).send({ success: true, msg: "Authenticated!!" });
+});
 
-// //update password route
-// router.post("/update-password", update_password);
+//update password route
+router.post("/update-password", update_password);
 
-// router.post("/forgot-password", forgot_password);
+router.post("/forgot-password", forgot_password);
 
-// router.get("/reset-password", reset_password);
+router.get("/reset-password", reset_password);
 
 router.post("/add-profile", upload.single("image"), add_profile);
+router.post("/update-profile", update_profile);
+router.post("/add-location", add_location)
 
 export default router;

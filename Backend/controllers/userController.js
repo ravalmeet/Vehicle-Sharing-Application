@@ -24,7 +24,6 @@ const sendResetPasswordMail = async (name, email, token) => {
       to: email,
       subject: "Reset Password",
       html:
- 
         "<p> Hii " +
         name +
         ', Please copy the link <a href = "http://localhost:3000/api/reset-password?token=' +
@@ -121,7 +120,7 @@ export const loginUser = async (req, res) => {
           _id: user._id,
           name: user.name,
           email: user.email,
-          password: user.password,         
+          password: user.password,
           phoneNumber: user.phoneNumber,
           isHost: user.isHost,
           isVerified: user.isVerified,
@@ -154,7 +153,7 @@ export const update_password = async (req, res) => {
 
     if (data) {
       const newPassword = await securePassword(password);
- 
+
       const userData = await UserModel.findByIdAndUpdate(
         { _id: user_id },
         {
@@ -209,7 +208,7 @@ export const reset_password = async (req, res) => {
     if (tokenData) {
       const password = req.body.password;
       const newPassword = await securePassword(password);
- 
+
       const userData = await User.findByIdAndUpdate(
         { _id: tokenData._id },
         {
@@ -221,7 +220,7 @@ export const reset_password = async (req, res) => {
         },
         { new: true }
       );
- 
+
       res.status(200).send({
         success: true,
         msg: "User password has been reset",
@@ -233,23 +232,20 @@ export const reset_password = async (req, res) => {
         .send({ success: true, msg: "This link has been expired" });
     }
   } catch (err) {
- 
     res.status(400).send({ success: false, msg: err.message });
   }
 };
 
-
-
 export const add_profile = async (req, res) => {
-  console.log(req)
+  console.log(req);
   const user_id = req.body.user_id;
-   
-  console.log(image)
+
+  console.log(image);
   try {
-    const userData = await UserModel.findOne({  id: user_id  });
+    const userData = await UserModel.findOne({ id: user_id });
     if (userData) {
       const data = await UserModel.updateOne(
-        {  _id: user_id },
+        { _id: user_id },
         { $set: { image: req.file.filename } }
       );
 
@@ -261,4 +257,70 @@ export const add_profile = async (req, res) => {
     res.status(400).send({ success: false, msg: err.message });
   }
 };
-  
+
+export const update_profile = async (req, res) => {
+  try {
+    const user_id = req.body.user_id;
+    const newName = req.body.name;
+    const newEmail = req.body.email;
+    const newPhone = req.body.phoneNumber;
+    const newProfilePic = req.file.filename;
+
+    const data = await UserModel.findOne({ id: user_id });
+
+    if (data) {
+      const userData = await UserModel.findByIdAndUpdate(
+        { _id: user_id },
+        {
+          $set: {
+            name: newName,
+            email: newEmail,
+            phoneNumber: newPhone,
+            profilePic: newProfilePic,
+          },
+        }
+      );
+
+      res
+        .status(200)
+        .send({ success: true, msg: "Your profile has been updated" });
+    } else {
+      res.status(200).send({ success: false, msg: "User Id not found!!" });
+    }
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
+export const add_location = async (req, res) => {
+  const latitude = req.body.latitude;
+  const longitude = req.body.longitude;
+  const journeyTime = req.body.journeyTime;
+  const email = req.body.email;
+  console.log(req);
+
+  try {
+    const userData = await UserModel.findOne({ email: email });
+    if (userData) {
+      const data = await UserModel.updateOne(
+        { email: email },
+        {
+          $set: {
+            latitude: latitude,
+            longitude: longitude,
+            journeyTime: journeyTime,
+          },
+        }
+      );
+
+      res.status(200).send({
+        success: true,
+        msg: "Location added successfully!! ",
+      });
+    } else {
+      res.status(200).send({ success: false, msg: "User doesn't exists" });
+    }
+  } catch (err) {
+    res.status(400).send({ success: false, msg: err.message });
+  }
+};
