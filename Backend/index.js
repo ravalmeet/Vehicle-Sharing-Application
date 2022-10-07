@@ -30,6 +30,5 @@ mongoose
 app.use("/auth", authRoute);
 app.use("/auth", groupRoute);
 app.use("/auth",districtAreaRoute)
-// app.use("/api", profileRouter);
 
 app.use('/driving',drivingRoute);
