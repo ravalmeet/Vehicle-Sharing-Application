@@ -8,7 +8,8 @@ import {
   add_profile,
   update_profile,
   add_location,
-  
+  add_areaDistrict,
+  host_details,
 } from "../controllers/userController.js";
 const router = express();
 router.use(bodyParser.json());
@@ -40,7 +41,6 @@ const upload = multer({ storage: storage });
 import { verifyToken } from "../middleware/auth.js";
 import bodyParser from "body-parser";
 
-
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 
@@ -59,6 +59,7 @@ router.get("/reset-password", reset_password);
 
 router.post("/add-profile", upload.single("image"), add_profile);
 router.post("/update-profile", update_profile);
-router.post("/add-location", add_location)
-
+router.post("/add-location", add_location);
+router.post("/add-areaDistrict", add_areaDistrict);
+router.post("/host-details", host_details);
 export default router;

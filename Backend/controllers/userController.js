@@ -238,14 +238,14 @@ export const reset_password = async (req, res) => {
 
 export const add_profile = async (req, res) => {
   console.log(req);
-  const user_id = req.body.user_id;
+  const email = req.body.email;
 
   console.log(image);
   try {
-    const userData = await UserModel.findOne({ id: user_id });
+    const userData = await UserModel.findOne({ email: email });
     if (userData) {
       const data = await UserModel.updateOne(
-        { _id: user_id },
+        { email: email },
         { $set: { image: req.file.filename } }
       );
 
@@ -324,3 +324,74 @@ export const add_location = async (req, res) => {
     res.status(400).send({ success: false, msg: err.message });
   }
 };
+
+
+export const add_areaDistrict = async(req,res) => {
+  const district = req.body.district;
+  const area = req.body.area;
+  const journeyTime = req.body.journeyTime;
+  const email = req.body.email;
+
+  try {
+    const userData = await UserModel.findOne({ email: email });
+    if (userData) {
+      const data = await UserModel.updateOne(
+        { email: email },
+        {
+          $set: {
+            district: district,
+            area: area,
+            journeyTime: journeyTime,
+          },
+        }
+      );
+
+      res.status(200).send({
+        success: true,
+        msg: "District and Area added successfully!! ",
+      });
+    } else {
+      res.status(200).send({ success: false, msg: "User doesn't exists" });
+    }
+  } catch (err) {
+    res.status(400).send({ success: false, msg: err.message });
+  }
+}
+
+export const host_details = async(req,res) => {
+  const district = req.body.district;
+  const area = req.body.area;
+  const journeyTime = req.body.journeyTime;
+  const email = req.body.email;
+  const totalSeats = req.body.totalSeats
+
+  try {
+    const userData = await UserModel.findOne({ email: email });
+    if (userData) {
+      const data = await UserModel.updateOne(
+        { email: email },
+        {
+          $set: {
+            district: district,
+            area: area,
+            journeyTime: journeyTime,
+            totalSeats:totalSeats,
+          },
+        }
+      );
+
+      res.status(200).send({
+        success: true,
+        msg: "Hello Host, District and Area added successfully!! ",
+      });
+    } else {
+      res.status(200).send({ success: false, msg: "User doesn't exists" });
+    }
+  } catch (err) {
+    res.status(400).send({ success: false, msg: err.message });
+  }
+}
+
+export const group_details = async(req,res) => {
+  
+}

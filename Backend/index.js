@@ -1,7 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
-import mongoose from "mongoose"; 
+import mongoose from "mongoose";
 import authRoute from "./routes/authRoute.js"; // auth routes
+import groupRoute from "./routes/groupRoute.js";
+import districtAreaRoute from "./routes/districtAreaRoute.js"
 // import profileRouter from "./routes/profileRoute.js"; // profile routes
 const app = express();
 
@@ -19,5 +21,7 @@ mongoose
   .catch((error) => console.log(`${error} did not connect`));
 
 app.use("/auth", authRoute);
- 
+app.use("/auth", groupRoute);
+app.use("/auth",districtAreaRoute)
+
 // app.use("/api", profileRouter);
