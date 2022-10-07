@@ -9,12 +9,12 @@ export const driving_licence = async (req, res) => {
             res.status(200).send({
                 success: true,
 
-                msg: "User driving licence has been authorizise successfully.",
+                msg: "User driving licence has been authorizised successfully.",
             })
       } else {
         res
           .status(200)
-          .send({ success: true, msg: "User driving licence has not authorizise successfully" });
+          .send({ success: true, msg: "User driving licence has not authorizised successfully" });
       }
     } catch (error) {   
       res.status(400).send({ success: false, msg: error.message });
