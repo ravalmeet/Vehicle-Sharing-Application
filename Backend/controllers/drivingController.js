@@ -3,7 +3,7 @@ export const driving_licence = async (req, res) => {
       const email = req.body.email;
       const number = req.body.number;
 
-      
+
   
       if (number) {
             res.status(200).send({
@@ -14,7 +14,7 @@ export const driving_licence = async (req, res) => {
       } else {
         res
           .status(200)
-          .send({ success: true, msg: "This email does not exists" });
+          .send({ success: true, msg: "User driving licence has not authorizise successfully" });
       }
     } catch (error) {   
       res.status(400).send({ success: false, msg: error.message });
