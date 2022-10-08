@@ -1,11 +1,12 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "userInterfaceStyle": "automatic",
+    "name": "uber_clonee",
+    "slug": "uber_clonee",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+   
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

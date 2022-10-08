@@ -14,23 +14,24 @@ import Tabs from './screens/tab'
 import * as Font from 'expo-font'
 import AppLoading from 'expo-app-loading'
 import NotificationScreen from "./screens/Notificationscreen/notificatiion_screen";
-
+import PassengerList from "./screens/passenger_list";
+import LoadingScreen from "./screens/loading_screen";
+import HostScreen from "./screens/hostcar_screen";
+import GrpLoading from "./screens/loadingScreen/grpLoadingScree";
+import GrpComplete from "./screens/grpCompleteLoadingScree";
+import JsonFetch from "./screens/jsonFetch";
+import JsonDate from "./screens/jsonFetch";
+import DemoApi from "./screens/demo/demoFeatch";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-  /*   const [fontLoaded, setFontLoaded] = useState(false) */
 
-  /*   async function getFonts() {
-      await Font.loadAsync({
-        "open-sans": require('./assets/fonts/OpenSans-VariableFont_wdth,wght.ttf')
-      })
-    } */
 
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="HomeScreen" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="IntroScreen" screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name="IntroScreen"
           component={IntoScreen}
@@ -44,6 +45,10 @@ export default function App() {
           component={HomeScreen}
         />
         <Stack.Screen
+          name="GrpComplete"
+          component={GrpComplete}
+        />
+        <Stack.Screen
           name="LogScreen"
           component={LogScreen}
         />
@@ -55,13 +60,22 @@ export default function App() {
           name="ForgetpasswordScreen"
           component={ForgetpasswordScreen}
         />
+
         <Stack.Screen
           name="NewpasswordScreeen"
           component={NewpasswordScreeen}
         />
+
+        <Stack.Screen
+          name="PassengerList"
+          component={PassengerList}
+        />
+
         <Stack.Screen name="Tab" component={Tabs} />
+        <Stack.Screen name="HostScreen" component={HostScreen} />
 
         <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
+        <Stack.Screen name="LoadingScreen" component={LoadingScreen} />
 
       </Stack.Navigator>
       <StatusBar style="dark" />
