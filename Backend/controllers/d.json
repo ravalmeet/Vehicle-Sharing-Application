@@ -1,0 +1,60 @@
+{
+  "success": true,
+  "data": [
+    {
+      "name": "Raju Sharma",
+      "area": "Sabarmati river front",
+      "journeyTime": "9:30 AM"
+    },
+    {
+      "name": "Madhu saini l",
+      "area": "Sidi saiyad mosque",
+      "journeyTime": "9:30 AM"
+    },
+    {
+      "name": "kalash thakkar",
+      "area": "Kakariya",
+      "journeyTime": "10 am"
+    },
+    {
+      "name": "Kunal Maurya",
+      "area": "Swaminarayan Mandir",
+      "journeyTime": "9:30 AM"
+    },
+    {
+      "name": "Meet Raval",
+      "area": "Airport Road",
+      "journeyTime": "10 am"
+    },
+    {
+      "name": "Trisha Dabbawala",
+      "area": "Behram pur police station",
+      "journeyTime": "10 am"
+    },
+    {
+      "name": "Lucy Bagman",
+      "area": "Behram pur police station",
+      "journeyTime": "10 am"
+    },
+    {
+      "name": "Megh Mavapuri",
+      "area": "Airport Road",
+      "journeyTime": "10 am"
+    },
+    {
+      "name": "Tejas Shah",
+      "area": "Airport Road",
+      "journeyTime": "10 am"
+    },
+    {
+      "name": "Manan Kandawala",
+      "area": "Sadar Bazar",
+      "journeyTime": "10 am"
+    },
+    {
+      "name": "Rishi Jariwala",
+      "area": "Sadar Bazar",
+      "journeyTime": "10 am"
+    }
+  ]
+}

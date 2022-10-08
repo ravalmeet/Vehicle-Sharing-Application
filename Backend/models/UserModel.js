@@ -10,8 +10,8 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    latitude: { type: String, default: "" },
-    longitude: { type: String, default: "" },
+    // latitude: { type: String, default: "" },
+    // longitude: { type: String, default: "" },
     journeyTime: { type: String, default: "" },
     district: { type: String, default: "" },
     area: { type: String, default: "" },
@@ -27,3 +27,6 @@ const UserSchema = new mongoose.Schema(
 
 const UserModel = mongoose.model("Users", UserSchema);
 export default UserModel;
+
+
+
