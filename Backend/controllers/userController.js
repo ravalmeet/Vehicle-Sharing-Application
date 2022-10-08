@@ -368,31 +368,19 @@ export const add_areaDistrict = async (req, res) => {
         });
       }
 
-      console.log(area12);
-
-      let data1;
-      try {
-        data1 = await DistrictUserModel.updateOne(
-          {
+      const data1 = await DistrictUserModel.updateOne(
+        { "district.coordinates.areaName": area12 },
+        {
+          $set: {
             district: {
-              areas: {
-                areaName: area12,
+              coordinates: {
+                coordinates: users,
               },
             },
           },
-          {
-            district: {
-              areas: {
-                areaName: area12,
-              },
-            },
-          }
-          
-        );
-      } catch (error) {
-        console.error(error);
-      }
-      console.log(users, data1);
+        }
+      );
+      console.log(users);
 
       res.status(200).send({
         success: true,
