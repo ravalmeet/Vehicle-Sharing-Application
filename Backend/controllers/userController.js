@@ -352,7 +352,7 @@ export const add_areaDistrict = async (req, res) => {
       });
 
       // const dataDistric = result.district.districtName;
-      let users = []
+      let users = [];
       if (result) {
         const district = result.district.toJSON();
         const areas = district.areas;
@@ -360,25 +360,39 @@ export const add_areaDistrict = async (req, res) => {
         areas.forEach((area) => {
           let area1 = String(area.areaName).trim().toLowerCase();
           let area2 = area12.toLowerCase().trim();
-        //  console.log(area1,area2);
+          //  console.log(area1,area2);
           if (area1 == area2) {
             users = area.coordinates;
-            users.push(email)
+            users.push(email);
           }
         });
       }
-      const data1 = await DistrictUserModel.updateOne(
-        { "district.areas.areaName": area12  },
-        {
-          $set: {
+
+      console.log(area12);
+
+      let data1;
+      try {
+        data1 = await DistrictUserModel.updateOne(
+          {
             district: {
-              coordinates:users
-             },
-             
+              areas: {
+                areaName: area12,
+              },
+            },
           },
-        }
-      );
-      console.log(users)
+          {
+            district: {
+              areas: {
+                areaName: area12,
+              },
+            },
+          }
+          
+        );
+      } catch (error) {
+        console.error(error);
+      }
+      console.log(users, data1);
 
       res.status(200).send({
         success: true,
