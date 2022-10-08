@@ -4,6 +4,8 @@ import jwt from "jsonwebtoken";
 import { config } from "../config/config.js";
 import randomstring from "randomstring";
 import nodemailer from "nodemailer";
+import districtUserRoute from "../routes/districtUserRoute.js";
+import DistrictUserModel from "../models/districtUserModel.js";
 
 // method for sending reset-password mail to user
 const sendResetPasswordMail = async (name, email, token) => {
@@ -325,13 +327,12 @@ export const add_location = async (req, res) => {
   }
 };
 
-
-export const add_areaDistrict = async(req,res) => {
+export const add_areaDistrict = async (req, res) => {
   const district = req.body.district;
   const area = req.body.area;
   const journeyTime = req.body.journeyTime;
   const email = req.body.email;
-
+  const area12 = req.body.area;
   try {
     const userData = await UserModel.findOne({ email: email });
     if (userData) {
@@ -346,6 +347,39 @@ export const add_areaDistrict = async(req,res) => {
         }
       );
 
+      const result = await DistrictUserModel.findOne({
+        "district.districtName": district,
+      });
+
+      // const dataDistric = result.district.districtName;
+      let users = []
+      if (result) {
+        const district = result.district.toJSON();
+        const areas = district.areas;
+        // console.log(areas);
+        areas.forEach((area) => {
+          let area1 = String(area.areaName).trim().toLowerCase();
+          let area2 = area12.toLowerCase().trim();
+        //  console.log(area1,area2);
+          if (area1 == area2) {
+            users = area.coordinates;
+            users.push(email)
+          }
+        });
+      }
+      const data1 = await DistrictUserModel.updateOne(
+        { "district.areas.areaName": area12  },
+        {
+          $set: {
+            district: {
+              coordinates:users
+             },
+             
+          },
+        }
+      );
+      console.log(users)
+
       res.status(200).send({
         success: true,
         msg: "District and Area added successfully!! ",
@@ -356,14 +390,14 @@ export const add_areaDistrict = async(req,res) => {
   } catch (err) {
     res.status(400).send({ success: false, msg: err.message });
   }
-}
+};
 
-export const host_details = async(req,res) => {
+export const host_details = async (req, res) => {
   const district = req.body.district;
   const area = req.body.area;
   const journeyTime = req.body.journeyTime;
   const email = req.body.email;
-  const totalSeats = req.body.totalSeats
+  const totalSeats = req.body.totalSeats;
 
   try {
     const userData = await UserModel.findOne({ email: email });
@@ -375,7 +409,7 @@ export const host_details = async(req,res) => {
             district: district,
             area: area,
             journeyTime: journeyTime,
-            totalSeats:totalSeats,
+            totalSeats: totalSeats,
           },
         }
       );
@@ -390,8 +424,6 @@ export const host_details = async(req,res) => {
   } catch (err) {
     res.status(400).send({ success: false, msg: err.message });
   }
-}
+};
 
-export const group_details = async(req,res) => {
-  
-}
+export const group_details = async (req, res) => {};
