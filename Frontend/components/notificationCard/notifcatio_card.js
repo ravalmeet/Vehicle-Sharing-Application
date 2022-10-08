@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, useWindowDimensions } from 'react-native'
 import React from 'react'
+import CustomButton from '../customButton/custom_button';
 
 const NotificationCard = () => {
 
@@ -13,12 +14,20 @@ const NotificationCard = () => {
       <View>
         <Text style={styles.senderName}>Golakiya Dhruval V</Text>
       </View>
+      <View style={styles.btnContainer}>
+        <CustomButton />
+      </View>
     </View>
   )
 }
 
 
 const styles = StyleSheet.create({
+  btnContainer: {
+
+  },
+
+
   container: {
     flexDirection: 'row',
     backgroundColor: '#DCDCDC',

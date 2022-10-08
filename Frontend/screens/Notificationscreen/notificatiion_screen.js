@@ -18,11 +18,12 @@ const NotificationScreen = ({ navigation }) => {
   return (
     <SafeAreaView>
       <View style={[styles.header, { height: height * 0.07 }]}>
-        <Ionicons style={styles.icon} name="chevron-back" size={30} color="black" />
-        <Text style={[{ fontSize: 20, }]}>Notifications</Text>
         <TouchableOpacity onPress={onClosePressed}>
-          <AntDesign style={styles.icon} name="close" size={30} color="black" />
+          <AntDesign style={styles.icon} name="close" size={24} color="black" />
         </TouchableOpacity>
+        <Text style={[{ fontSize: 20, }]}>Notifications</Text>
+        <Ionicons style={styles.icon} name="chevron-back" size={30} color="#E5E4E2" />
+
       </View>
 
       <NotificationCard />
@@ -40,8 +41,8 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    marginHorizontal: '4%',
-    color: 'black'
+    marginHorizontal: '10%',
+
   }
 })
 

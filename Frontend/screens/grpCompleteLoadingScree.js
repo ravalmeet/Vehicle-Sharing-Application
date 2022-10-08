@@ -4,36 +4,51 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import FindloadingScreen from './loadingScreen/findPassengerLoading_screen'
 import LottieView from 'lottie-react-native';
 import { Ionicons, Feather } from '@expo/vector-icons';
+import PassengerList from './passenger_list';
+import GrpLoading from './loadingScreen/grpLoadingScree';
 
-
-
-const SharecarScreen = () => {
-
+const GrpComplete = ({ navigation }) => {
 
   const { height } = useWindowDimensions();
 
+  const onTouch = () => {
+    navigation.navigate(PassengerList)
+  }
+
+  const onBack = () => {
+    navigation.pop()
+  }
+
 
   return (
+
     <SafeAreaView style={{ backgroundColor: 'white' }}>
 
       <View style={[styles.header, { height: height * 0.07 }]}>
-        <TouchableOpacity>
-          <Ionicons style={styles.icon} name="chevron-back-outline" size={24} color="black" />
+        <TouchableOpacity onPress={onBack}>
+          {/*  <Ionicons style={styles.icon} name="chevron-back-outline" size={24} color="white" /> */}
         </TouchableOpacity>
-        <Text style={[{ fontSize: 20, }]}>Searching For Ride Mates</Text>
-        <Feather style={styles.icon} name="bell" size={24} color="black" />
+
+        <Text style={[{ fontSize: 20, }]}>Group Created</Text>
+        <TouchableOpacity>
+          <Ionicons name="ios-arrow-up-sharp" size={24} color="white" />
+        </TouchableOpacity>
 
       </View>
-      <FindloadingScreen />
+      <TouchableOpacity onPress={onTouch}>
+
+
+        <GrpLoading />
+
+      </TouchableOpacity>
       <View style={styles.loadingScreenInfo}>
-        <Text style={{ fontSize: 25 }}>Grouping..</Text>
-        <Text style={{ opacity: 0.5 }}> This may take a few seconds...</Text>
+        <Text style={{ fontSize: 20 }}>Congratulations!!</Text>
+        <Text style={{ opacity: 0.5 }}>Group created succesfully</Text>
       </View>
     </SafeAreaView>
   )
+
 }
-
-
 const styles = StyleSheet.create({
 
 
@@ -45,7 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   icon: {
-    marginHorizontal: '5%',
+    marginHorizontal: '7%',
     color: 'black'
   },
 
@@ -54,5 +69,4 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
-
-export default SharecarScreen
+export default GrpComplete

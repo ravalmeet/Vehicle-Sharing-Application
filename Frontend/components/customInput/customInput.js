@@ -4,7 +4,7 @@ import React from 'react'
 const CustomInput = ({ value, setValue, placeholder, secureTextEntry }) => {
   return (
     <View style={styles.container}>
-      <TextInput value={value} onChangeText={setValue} placeholder={placeholder} secureTextEntry={secureTextEntry} style={styles.input} />
+      <TextInput value={value} onChangeText={setValue} placeholder={placeholder} secureTextEntry={secureTextEntry} style={styles.input} placeholderTextColor="black" />
     </View>
   )
 }
@@ -21,7 +21,9 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
 
-  input: {}
+  input: {
+    color: 'black'
+  }
 
 })
 

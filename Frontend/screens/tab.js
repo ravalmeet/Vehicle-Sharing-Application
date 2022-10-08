@@ -4,8 +4,12 @@ import HostcarScreen from "./hostcar_screen";
 import ProfileScreen from "./profile_screen";
 import SharecarScreen from "./sharecar_screen";
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { EvilIcons, Feather, FontAwesome5 } from '@expo/vector-icons';
+import { EvilIcons, Feather, FontAwesome5, Fontisto } from '@expo/vector-icons';
 import Ionic from 'react-native-vector-icons/Ionicons'
+import rideLogo from '../images/ridePng.png'
+import { Image, StyleSheet, View } from 'react-native'
+import MaterialIcon from '@expo/vector-icons/MaterialCommunityIcons'
+
 
 
 const Tab = createBottomTabNavigator();
@@ -24,12 +28,23 @@ const Tabs = () => {
           iconName = focus ? 'ios-car' : 'ios-car-outline'
         }
         else if (route.name === 'ride') {
-          iconName = focus ? 'ios-home' : 'ios-home-outline'
+
+          return (
+
+            <MaterialIcon name='car-3-plus' size='25' color={color} />
+
+          )
+
         }
         else if (route.name === 'profile') {
           iconName = focus ? 'ios-person' : 'ios-person'
         }
-        return <Ionic name={iconName} size={size} color={color} />
+
+        return (
+          <Ionic name={iconName} size={size} color={color} />
+
+
+        )
       },
     })}>
       <Tab.Screen name='Home' component={HomeScreen} />
@@ -39,5 +54,14 @@ const Tabs = () => {
     </Tab.Navigator>
   )
 }
+const styles = StyleSheet.create({
+
+  vCard: {
+    width: 10,
+    height: 10,
+  }
+
+
+})
 
 export default Tabs

@@ -22,14 +22,15 @@ const SigninScreen = ({ navigation }) => {
 
 
   const onSignUpPressed = () => {
-    console.warn("Sign Up")
+    navigation.navigate('HomeScreen')
+
   }
 
   const onForgotPasswordPressed = () => {
     console.warn("Password Changed")
   }
   const onCreateAccountPressed = () => {
-    navigation.replace('SigninScreen')
+    navigation.navigate('LogScreen')
   }
 
 
@@ -37,14 +38,15 @@ const SigninScreen = ({ navigation }) => {
   return (
     <SafeAreaView>
       <View style={styles.root}>
-        <Image source={logo} resizeMode="contain" style={[styles.logo, { height: height * 0.4 }]} />
+        <Text style={{ fontFamily: 'Alka', fontWeight: '200', fontSize: 60, marginBottom: 20, marginTop: 20 }}>Sign Up</Text>
+
 
         <CustomInput placeholder='Name' value={name} setValue={setName} />
         <CustomInput placeholder='Email' value={username} setValue={setUsername} />
         <CustomInput placeholder='password' value={password} setValue={setPassword} secureTextEntry={true} />
         <CustomInput placeholder='Confirm password' value={passwordRepeat} setValue={setPasswordRepeat} secureTextEntry={true} />
         <CustomButton text='Sign Up' onPress={onSignUpPressed} />
-        {/*       <TouchableOpacity onPress={onCreateAccountPressed}><Text style={{ opacity: 0.7, fontSize: 10, marginTop: 10, }}>Back to Login scren </Text></TouchableOpacity> */}
+        <TouchableOpacity onPress={onCreateAccountPressed}><Text style={{ opacity: 0.5, fontSize: 15, marginTop: 10, }}>Back to Login scren </Text></TouchableOpacity>
 
 
       </View>

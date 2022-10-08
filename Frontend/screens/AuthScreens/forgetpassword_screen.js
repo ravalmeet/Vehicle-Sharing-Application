@@ -8,7 +8,7 @@ import CustomButton from '../../components/customButton/custom_button'
 
 const ForgetpasswordScreen = ({ navigation }) => {
 
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
 
 
   const onSendPressed = () => {
@@ -23,7 +23,7 @@ const ForgetpasswordScreen = ({ navigation }) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.root}>
           <Text style={styles.title}>Reset your password</Text>
-          <CustomInput placeholder='Username' value={username} setValue={setUsername} />
+          <CustomInput placeholder='Email' value={email} setValue={setEmail} />
           <CustomButton text='Send' onPress={onSendPressed} />
           <TouchableOpacity onPress={onBackToSignInPressed}><Text style={{ opacity: 0.7, fontSize: 15, marginTop: 5, }}>Back to Sign In</Text></TouchableOpacity>
 

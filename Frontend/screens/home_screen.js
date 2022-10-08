@@ -8,10 +8,13 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { EvilIcons, Feather, FontAwesome5 } from '@expo/vector-icons';
 import VerificationCard from '../components/VerificationCard/verification_card';
 import GroupDetail from '../components/grpDetails/grpDetails';
+import Tab from '../screens/tab'
 
 const HomeScreen = ({ navigation }) => {
 
   const { height } = useWindowDimensions();
+
+
   const onNotificationPressed = () => {
     navigation.navigate('NotificationScreen')
   }
@@ -28,6 +31,7 @@ const HomeScreen = ({ navigation }) => {
       <VerificationCard />
       <View style={[{ backgroundColor: '#F5F5F5', width: '100%', height: 30 }]}></View>
       <GroupDetail />
+
     </SafeAreaView>
   );
 };
