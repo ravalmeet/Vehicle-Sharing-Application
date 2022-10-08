@@ -367,24 +367,25 @@ export const add_areaDistrict = async (req, res) => {
           }
         });
       }
-
+      console.log(users);
       const data1 = await DistrictUserModel.updateOne(
-        { "district.coordinates.areaName": area12 },
+        { "district.areas.areaName": area12 },
         {
           $set: {
             district: {
-              coordinates: {
+              areas: {
                 coordinates: users,
               },
             },
           },
         }
       );
-      console.log(users);
+      // console.log(users);
 
       res.status(200).send({
         success: true,
         msg: "District and Area added successfully!! ",
+        users: users,
       });
     } else {
       res.status(200).send({ success: false, msg: "User doesn't exists" });

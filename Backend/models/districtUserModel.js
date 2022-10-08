@@ -4,7 +4,7 @@ const DistrictUserSchema = new mongoose.Schema(
   {
     district: {
       districtName: { type: String, required: true },
-      coordinates: [
+      areas: [
         { areaName: { type: String, required: true }, coordinates: [] },
       ],
     },
