@@ -10,6 +10,7 @@ import {
   add_location,
   add_areaDistrict,
   host_details,
+  verify_email,
 } from "../controllers/userController.js";
 const router = express();
 router.use(bodyParser.json());
@@ -62,4 +63,5 @@ router.post("/update-profile", update_profile);
 router.post("/add-location", add_location);
 router.post("/add-areaDistrict", add_areaDistrict);
 router.post("/host-details", host_details);
+router.post("/verify-email",verify_email)
 export default router;

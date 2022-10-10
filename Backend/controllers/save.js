@@ -9,7 +9,7 @@ import DistrictUserModel from "../models/districtUserModel.js";
 import UserOTPVerifyModel from "../models/userOTPVerify.js";
 
 // method for sending reset-password mail to user
-const sendResetPasswordMail = async (name, email, token) => {
+const sendResetPasswordMail = async (mailOptions) => {
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -22,48 +22,6 @@ const sendResetPasswordMail = async (name, email, token) => {
       },
     });
 
-    const mailOptions = {
-      from: config.emailUser,
-      to: email,
-      subject: "Reset Password",
-      html:
-        "<p> Hii " +
-        name +
-        ', Please copy the link <a href = "http://localhost:3000/api/reset-password?token=' +
-        token +
-        '"> and reset your password<a/>',
-    };
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Mail has been sent:= ", info.response);
-      }
-    });
-  } catch (error) {
-    res.status(400).send({ success: false, msg: error.message });
-  }
-};
-
-const sendOTPEmail = async (email, otp) => {
-  try {
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: false,
-      requireTLS: true,
-      auth: {
-        user: config.emailUser,
-        pass: config.emailPassword,
-      },
-    });
-
-    const mailOptions = {
-      from: config.emailUser,
-      to: email,
-      subject: "Reset Password",
-      html: ` <p> Enter <b> ${otp} </b> in the app to verify your email address and complete the verification. This code <b>expires in 1 hour</b>. </p>`,
-    };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
@@ -121,13 +79,10 @@ export const registerUser = async (req, res) => {
         msg: "Password Must be same and have more than 6 characters",
       });
     } else {
-      const userdata = await newUser.save();
-      sendOTPVerificationEmail(req.body.email);
-      res.status(200).send({
-        success: true,
-        msg: "Please check your inbox and verify your account",
+      const userdata = await newUser.save().then((result) => {
+        sendOTPVerificationEmail(result, res);
       });
-      // res.status(200).send({ success: true, data: userdata });
+      res.status(200).send({ success: true, data: userdata });
     }
   } catch (error) {
     res.status(400).send({ message: error.message });
@@ -214,7 +169,18 @@ export const forgot_password = async (req, res) => {
         { email: email },
         { $set: { token: randomString } }
       );
-      sendResetPasswordMail(userData.name, userData.email, randomString);
+      const mailOptions = {
+        from: config.emailUser,
+        to: email,
+        subject: "Reset Password",
+        html:
+          "<p> Hii " +
+          userData.name +
+          ', Please copy the link <a href = "http://localhost:3000/api/reset-password?token=' +
+          randomString +
+          '"> and reset your password<a/>',
+      };
+      sendResetPasswordMail(mailOptions);
       res.status(200).send({
         success: true,
         msg: "Please check your inbox and reset your password",
@@ -455,66 +421,33 @@ export const host_details = async (req, res) => {
   }
 };
 
-export const sendOTPVerificationEmail = async (email, res) => {
+export const sendOTPVerificationEmail = async ({ _id, email }, res) => {
   try {
     const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
 
-    // const hashedOTP = securePassword(otp);
+    const mailOptions = {
+      from: config.emailUser,
+      to: email,
+      subject: "Verify Your Email",
+      html: ` <p> Enter <b> ${otp} </b> in the app to verify your email address and complete the verification. This code <b>expires in 1 hour</b>. </p>`,
+    };
+    const hashedOTP = securePassword(otp);
     const newOTPVerification = await new UserOTPVerifyModel({
-      email: email,
-      otp: otp,
+      userId: _id,
+      otp: hashedOTP,
       createdAt: Date.now(),
       expiresAt: Date.now() + 3600000,
     });
 
     const userOTP = await newOTPVerification.save();
-    sendOTPEmail(email, otp);
-    res.status(200).send({ success: true, msg: "Verification otp email sent" });
-  } catch (err) {
-    // res.status(400).send({ success: false, msg: err.message });
-    console.log(err);
-  }
-};
-
-export const verify_email = async (req, res) => {
-  try {
-    const otp = req.query.otp;
-    const otpData = await UserOTPVerifyModel.findOne({ otp: otp });
-    if (otpData) {
-      const password = req.body.password;
-      const newPassword = await securePassword(password);
-
-      const userData = await User.findOne(
-        { email: otpData.email },
-        {
-          $set: {
-            isVerified: "true",
-          },
-        },
-        { new: true }
-      );
-      const Data = await UserOTPVerifyModel.findOne(
-        { email: otpData.email },
-        {
-          $set: {
-            otp: "",
-          },
-        },
-        { new: true }
-      );
-
-      res.status(200).send({
-        success: true,
-        msg: "yay!! You're verified now ;)",
-        data: userData,
-      });
-    } else {
-      res
-        .status(200)
-        .send({ success: true, msg: "This otp has been expired" });
-    }
+    sendResetPasswordMail(mailOptions);
+    res.status(200).send({ success: true, msg:"Verification otp email sent", data: {
+      user_id:_id,
+      email,
+    } });
   } catch (err) {
     res.status(400).send({ success: false, msg: err.message });
   }
 };
+
 export const group_details = async (req, res) => {};
