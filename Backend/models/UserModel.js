@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema(
     totalSeats: { type: String, default: "" },
     availableSeats: { type: String, default: 0 },
     isDLVerified: { type: Boolean, default: false }, // for driving licence verification
-    // groupID: { type: String },
+    groupID: { type: String , default:""},
   },
   { timestamps: true }
 );

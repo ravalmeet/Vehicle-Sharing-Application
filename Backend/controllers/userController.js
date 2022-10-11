@@ -207,7 +207,6 @@ export const forgot_password = async (req, res) => {
   try {
     const email = req.body.email;
     const userData = await UserModel.findOne({ email: email });
-    console.log("helooo");
     if (userData) {
       const randomString = randomstring.generate();
       const data = await UserModel.updateOne(
