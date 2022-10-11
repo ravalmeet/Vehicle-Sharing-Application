@@ -207,7 +207,7 @@ export const forgot_password = async (req, res) => {
   try {
     const email = req.body.email;
     const userData = await UserModel.findOne({ email: email });
-
+    console.log("helooo");
     if (userData) {
       const randomString = randomstring.generate();
       const data = await UserModel.updateOne(
@@ -479,39 +479,30 @@ export const sendOTPVerificationEmail = async (email, res) => {
 export const verify_email = async (req, res) => {
   try {
     const otp = req.query.otp;
+
+    if (!otp) {
+      throw Error("Empty otp details are not allowed");
+    }
+    let ans = true;
     const otpData = await UserOTPVerifyModel.findOne({ otp: otp });
     if (otpData) {
-      const password = req.body.password;
-      const newPassword = await securePassword(password);
-
-      const userData = await User.findOne(
+      const userData = await UserModel.updateOne(
         { email: otpData.email },
-        {
-          $set: {
-            isVerified: "true",
-          },
-        },
-        { new: true }
+        { $set: { isVerified: ans } }
       );
-      const Data = await UserOTPVerifyModel.findOne(
+      console.log(userData);
+      const Data = await UserOTPVerifyModel.updateOne(
         { email: otpData.email },
-        {
-          $set: {
-            otp: "",
-          },
-        },
-        { new: true }
+        { $set: { otp: "" } }
       );
 
       res.status(200).send({
         success: true,
-        msg: "yay!! You're verified now ;)",
-        data: userData,
+        msg: "yay!! You're verified now",
+        
       });
     } else {
-      res
-        .status(200)
-        .send({ success: true, msg: "This otp has been expired" });
+      res.status(200).send({ success: true, msg: "This otp has been expired" });
     }
   } catch (err) {
     res.status(400).send({ success: false, msg: err.message });

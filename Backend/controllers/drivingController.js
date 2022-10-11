@@ -1,26 +1,36 @@
+import UserModel from "../models/userModel.js";
+
 export const driving_licence = async (req, res) => {
-    try {
-      const email = req.body.email;
-      const number = req.body.number;
-
-
-  
+  try {
+    const email = req.body.email;
+    const number = req.body.number;
+    console.log("Dsfgdgfd");
+    const user = await UserModel.findOne({ email: email });
+    console.log(user);
+    if (user) {
       if (number) {
-            res.status(200).send({
-                success: true,
+        console.log("ander");
+        const Data = await UserModel.updateOne(
+          { email: email },
+          { $set: { isDLVerified: true } }
+        );
 
-                msg: "User driving licence has been authorizised successfully.",
-            })
+        res.status(200).send({
+          success: true,
+          msg: " User driving licence has been authorizised successfully.",
+        });
+        console.log("sabse ander");
       } else {
-        res
-          .status(200)
-          .send({ success: true, msg: "User driving licence has not authorizised successfully" });
+        res.status(200).send({
+          success: true,
+          msg: "User driving licence has not been authorizised successfully",
+        });
       }
-    } catch (error) {   
-      res.status(400).send({ success: false, msg: error.message });
     }
-  };
-
+  } catch (error) {
+    res.status(400).send({ success: false, msg: error.message });
+  }
+};
 
 //   const request = require('request');
 
@@ -56,9 +66,9 @@ export const driving_licence = async (req, res) => {
 //     },
 //     json: true
 //   };
-  
+
 //   request(options, function (error, response, body) {
 //     if (error) throw new Error(error);
-  
+
 //     console.log(body);
 //   });

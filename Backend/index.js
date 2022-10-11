@@ -4,12 +4,6 @@ import mongoose from "mongoose";
 import authRoute from "./routes/authRoute.js"; // auth routes
 import groupRoute from "./routes/groupRoute.js";
 import districtAreaRoute from "./routes/districtAreaRoute.js"
-
-// import mongoose from "mongoose"; 
-// import { driving_licence } from "./controllers/drivingController";
-// import authRoute from "./routes/authRoute.js"; // auth routes
-
-// import profileRouter from "./routes/profileRoute.js"; // profile routes
 import drivingRoute from "./routes/drivingRoute.js";
 import districtUserRoute from "./routes/districtUserRoute.js";
 import { getSuggestedUsers } from "./controllers/getSuggestionsController.js";

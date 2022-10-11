@@ -16,10 +16,11 @@ const UserSchema = new mongoose.Schema(
     district: { type: String, default: "" },
     area: { type: String, default: "" },
     isHost: { type: Boolean, required: true },
-    isVerified: { type: Boolean, required: true },
+    isVerified: { type: Boolean, required: true }, // for email verification
     token: { type: String, default: "" },
     totalSeats: { type: String, default: "" },
     availableSeats: { type: String, default: 0 },
+    isDLVerified:{type:Boolean, default: false}
     // groupID: { type: String },
   },
   { timestamps: true }
