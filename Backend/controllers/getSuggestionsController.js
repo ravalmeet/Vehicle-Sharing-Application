@@ -44,13 +44,13 @@ export const getSuggestedUsers = async (req, res) => {
           const areaUsers = await Helper(hostDistrict, areaCoordinates);
           if (areaUsers) {
             areaUsers.forEach((user) => {
-              users.push(user);
+              users.push(user); 
             });
           }
         }
       }
     }
-    console.log(users);
+    // console.log(users ,"this is my final users");
     const allUsers = [];
     for (var i = 0; i < users.length; i++) {
       const email = users[i];

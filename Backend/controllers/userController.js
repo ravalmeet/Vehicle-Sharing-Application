@@ -267,7 +267,7 @@ export const reset_password = async (req, res) => {
 export const add_profile = async (req, res) => {
   console.log(req);
   const email = req.body.email;
-  
+
   console.log(image, "imageeeeeeeeeeeee");
   try {
     const userData = await UserModel.findOne({ email: email });
@@ -355,10 +355,9 @@ export const add_location = async (req, res) => {
 
 export const add_areaDistrict = async (req, res) => {
   const district = req.body.district;
-  const area = req.body.area;
   const journeyTime = req.body.journeyTime;
   const email = req.body.email;
-  const area12 = req.body.area;
+  const userArea = req.body.area;
   try {
     const userData = await UserModel.findOne({ email: email });
     if (userData) {
@@ -367,7 +366,7 @@ export const add_areaDistrict = async (req, res) => {
         {
           $set: {
             district: district,
-            area: area,
+            area: userArea,
             journeyTime: journeyTime,
           },
         }
@@ -385,7 +384,7 @@ export const add_areaDistrict = async (req, res) => {
         // console.log(areas);
         areas.forEach((area) => {
           let area1 = String(area.areaName).trim().toLowerCase();
-          let area2 = area12.toLowerCase().trim();
+          let area2 = userArea.toLowerCase().trim();
           //  console.log(area1,area2);
           if (area1 == area2) {
             users = area.coordinates;
@@ -395,7 +394,7 @@ export const add_areaDistrict = async (req, res) => {
       }
       console.log(users);
       const data1 = await DistrictUserModel.updateOne(
-        { "district.areas.areaName": area12 },
+        { "district.areas.areaName": userArea },
         {
           $set: {
             district: {
@@ -410,11 +409,11 @@ export const add_areaDistrict = async (req, res) => {
 
       res.status(200).send({
         success: true,
-        msg: "District and Area added successfully!! ",
+        msg: "You are added to district user DB and location addded successfully!! ",
         users: users,
       });
     } else {
-      res.status(200).send({ success: false, msg: "User doesn't exists" });
+      res.status(200).send({ success: false, msg: "User doesn't exists,Please register first" });
     }
   } catch (err) {
     res.status(400).send({ success: false, msg: err.message });

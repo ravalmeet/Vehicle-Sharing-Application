@@ -1,6 +1,6 @@
 import DistrictUserModel from "../models/districtUserModel.js";
 
-// Register new group
+ 
 export const create_districtUser = async (req, res) => {
   const newDistrictUser = new DistrictUserModel({
     district: {
@@ -22,8 +22,7 @@ export const create_districtUser = async (req, res) => {
     },
   });
 
-  try {
-    
+  try {    
     
     if (newDistrictUser) {
       const storeDistrict = await newDistrictUser.save();
