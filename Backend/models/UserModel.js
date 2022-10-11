@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema(
     token: { type: String, default: "" },
     totalSeats: { type: String, default: "" },
     availableSeats: { type: String, default: 0 },
-    isDLVerified:{type:Boolean, default: false}
+    isDLVerified: { type: Boolean, default: false }, // for driving licence verification
     // groupID: { type: String },
   },
   { timestamps: true }
@@ -28,6 +28,3 @@ const UserSchema = new mongoose.Schema(
 
 const UserModel = mongoose.model("Users", UserSchema);
 export default UserModel;
-
-
-

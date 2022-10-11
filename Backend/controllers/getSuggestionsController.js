@@ -39,46 +39,36 @@ export const getSuggestedUsers = async (req, res) => {
 
     for (const area of areas) {
       if (area.areaName == hostArea) {
-    
         for (var i = 0; i < area.coordinates.length; i++) {
           const areaCoordinates = area.coordinates[i];
           const areaUsers = await Helper(hostDistrict, areaCoordinates);
-          if(areaUsers){
-            areaUsers.forEach(au => {
-              users.push(au)
+          if (areaUsers) {
+            areaUsers.forEach((user) => {
+              users.push(user);
             });
           }
-
-          
-    
         }
       }
     }
-    console.log(users)
-    const allUsers = [
-
-    ]
-    for(var i = 0 ; i < users.length ; i++)
-    {
+    console.log(users);
+    const allUsers = [];
+    for (var i = 0; i < users.length; i++) {
       const email = users[i];
-      
+
       const userData = await UserModel.findOne({ email: email });
 
-      if(userData)
-      {
+      if (userData) {
         // console.log(userData);
         const showMe = {
           name: userData.name,
           area: userData.area,
-          journeyTime:userData.journeyTime
-        }
-        console.log(showMe)
-        allUsers.push(showMe)
-      }   
+          journeyTime: userData.journeyTime,
+        };
+        console.log(showMe);
+        allUsers.push(showMe);
+      }
     }
-    res.status(200).send({success:true,data:allUsers})
-
-
+    res.status(200).send({ success: true, data: allUsers });
   } catch (error) {
     res.status(400).send({ message: error.message });
   }

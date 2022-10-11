@@ -12,11 +12,16 @@ import {
   host_details,
   verify_email,
 } from "../controllers/userController.js";
+
 const router = express();
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
+
+
 import multer from "multer";
 import path from "path";
+
+
 const __dirname = path.resolve();
 router.use(express.static("public"));
 

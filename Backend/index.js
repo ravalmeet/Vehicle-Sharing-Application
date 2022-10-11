@@ -6,7 +6,7 @@ import groupRoute from "./routes/groupRoute.js";
 import districtAreaRoute from "./routes/districtAreaRoute.js"
 import drivingRoute from "./routes/drivingRoute.js";
 import districtUserRoute from "./routes/districtUserRoute.js";
-import { getSuggestedUsers } from "./controllers/getSuggestionsController.js";
+import getSuggestedRoute from "./routes/getSuggestions.js";
 
 const app = express();
 
@@ -27,6 +27,6 @@ app.use("/auth", authRoute);
 app.use("/auth", groupRoute);
 app.use("/auth",districtAreaRoute)
 app.use("/auth",districtUserRoute)
-app.use("/auth",getSuggestedUsers)
+app.use("/auth",getSuggestedRoute)
 
 app.use('/driving',drivingRoute);

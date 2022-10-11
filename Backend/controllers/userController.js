@@ -267,8 +267,8 @@ export const reset_password = async (req, res) => {
 export const add_profile = async (req, res) => {
   console.log(req);
   const email = req.body.email;
-
-  console.log(image);
+  
+  console.log(image, "imageeeeeeeeeeeee");
   try {
     const userData = await UserModel.findOne({ email: email });
     if (userData) {
@@ -292,7 +292,7 @@ export const update_profile = async (req, res) => {
     const newName = req.body.name;
     const newEmail = req.body.email;
     const newPhone = req.body.phoneNumber;
-    const newProfilePic = req.file.filename;
+    const image = req.file.filename;
 
     const data = await UserModel.findOne({ id: user_id });
 
@@ -304,7 +304,7 @@ export const update_profile = async (req, res) => {
             name: newName,
             email: newEmail,
             phoneNumber: newPhone,
-            profilePic: newProfilePic,
+            image: image,
           },
         }
       );
@@ -499,7 +499,6 @@ export const verify_email = async (req, res) => {
       res.status(200).send({
         success: true,
         msg: "yay!! You're verified now",
-        
       });
     } else {
       res.status(200).send({ success: true, msg: "This otp has been expired" });
